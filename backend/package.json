@@ -1,0 +1,22 @@
+{
+  "name": "ss-imobiliare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rusualex/ss-imobiliare.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rusualex/ss-imobiliare/issues"
+  },
+  "homepage": "https://github.com/rusualex/ss-imobiliare#readme",
+  "dependencies": {
+    "koa": "^2.11.0"
+  }
+}
