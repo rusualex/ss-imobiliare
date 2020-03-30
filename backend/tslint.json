@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "shared-tslint-mnn/tslint/tslint_node"
+  ],
+  "rules": {
+    "interface-name": [
+      true,
+      "always-prefix"
+    ]
+  }
+}
