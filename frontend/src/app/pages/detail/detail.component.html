@@ -1,0 +1,19 @@
+<div>
+  <div style="float: left" class="myCard col-lg-6 col-sm-12">
+    <mat-card>
+      <h2> {{getApartment().name}}</h2>
+      <h3>{{getApartment().details}}</h3>
+      <hr>
+      <h3>Owner:{{getApartment().owner}}</h3>
+      <h3>Price{{getApartment().price}}</h3>
+    </mat-card>
+  </div>
+  <div style="float: right" class=" myCard col-lg-6 col-sm-12 ">
+    <mat-card>
+      <div class="max-size">
+            <img src="./assets/img/{{getApartment().pictureFileName}}" alt="Picture">
+      </div>
+    </mat-card>
+  </div>
+</div>
+

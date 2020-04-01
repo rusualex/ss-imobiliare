@@ -1,4 +1,5 @@
 export class Apartment {
+  id: number;
   pictureFileName: string;
   name: string;
   details: string;

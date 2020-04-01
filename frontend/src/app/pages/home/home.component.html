@@ -1,6 +1,6 @@
 <div class="card-columns">
   <div *ngFor="let apartment of apartments ; let i = index">
-    <a [routerLink]="['/details']">
+    <a [routerLink]="['/details', apartment.id]">
       <div class="card">
         <img class="card-img-top" src="assets/img/{{apartment.pictureFileName}}" alt="Card image"
              matTooltip="Click to see more details!">

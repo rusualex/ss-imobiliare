@@ -26,6 +26,7 @@ import {HeaderComponent} from './pages/header/header.component';
 import {HomeComponent} from './pages/home/home.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {DetailComponent} from './pages/detail/detail.component';
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {DetailComponent} from './pages/detail/detail.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    MatCardModule
   ],
   exports: [
     FormsModule
