@@ -1,0 +1,17 @@
+<div class="card-columns">
+  <div *ngFor="let apartment of apartments ; let i = index">
+    <a [routerLink]="['/details']">
+      <div class="card">
+        <img class="card-img-top" src="assets/img/{{apartment.pictureFileName}}" alt="Card image"
+             matTooltip="Click to see more details!">
+        <div class="card-body">
+          <h3 class="card-title">{{apartment.name}}</h3>
+          <div class="card-text font-weight-lighter "> {{apartment.details}}</div>
+        </div>
+        <div class="card-footer">Owner: {{apartment.owner}} <br>
+          Price: {{apartment.price}}
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
