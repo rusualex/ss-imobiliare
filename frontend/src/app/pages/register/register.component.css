@@ -17,7 +17,7 @@
 }
 
 .jumbotron{
-  background-color: #f9fbf7 !important;
+  background-color: #fffaef !important;
   padding-top: 2%;
   margin-right: 7%;
   margin-left: 7%;
@@ -43,7 +43,8 @@
 
 ::ng-deep .snackbar {
   text-align: center !important;
-  background: #c0d5b2 !important;
+  background: #fff1d0 !important;
   opacity: 0.8 !important;
   margin-bottom: 20% !important;
+  color: darkslategrey;
 }

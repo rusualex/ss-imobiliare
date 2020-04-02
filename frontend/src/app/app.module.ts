@@ -27,6 +27,7 @@ import {HomeComponent} from './pages/home/home.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {DetailComponent} from './pages/detail/detail.component';
 import {MatCardModule} from "@angular/material/card";
+import { AddImobiliaComponent } from './pages/add-imobilia/add-imobilia.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {MatCardModule} from "@angular/material/card";
     HeaderComponent,
     HomeComponent,
     RegisterComponent,
-    DetailComponent
+    DetailComponent,
+    AddImobiliaComponent
   ],
   imports: [
     BrowserModule,

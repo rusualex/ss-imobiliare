@@ -1,5 +1,9 @@
 .card-body{
-  background-color: #f9fbf7 !important;
+  background-color: #fffaef !important;
+}
+
+.card-footer{
+  background-color: #fffaef !important;
 }
 
 a{

@@ -7,7 +7,8 @@ export class Apartment {
   price: string;
 
 
-  constructor(pictureFileName: string, name: string, details: string, owner: string, price: string) {
+  constructor(id: number, pictureFileName: string, name: string, details: string, owner: string, price: string) {
+    this.id = id;
     this.pictureFileName = pictureFileName;
     this.name = name;
     this.details = details;
