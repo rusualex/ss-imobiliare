@@ -5,12 +5,17 @@
       <h3>{{getApartment().details}}</h3>
       <hr>
       <h3>Owner:{{getApartment().owner}}</h3>
-      <h3>Price{{getApartment().price}}</h3>
+      <h3>Price:{{getApartment().price}}</h3>
     </mat-card>
   </div>
   <div style="float: right" class=" myCard col-lg-6 col-sm-12 ">
     <mat-card>
       <img style="width: 100%" src="./assets/img/{{getApartment().pictureFileName}}" alt="Picture">
+    </mat-card>
+  </div>
+  <div style="float: left" class="myCard col-lg-6 col-sm-12 mt-3" *ngIf="getmapLink()">
+    <mat-card >
+      <div class="e2e-inner-html-bound"  [innerHTML]="getmapLink()" ></div>
     </mat-card>
   </div>
 </div>
