@@ -1,0 +1,11 @@
+.mat-card{
+  background-color: #fffaef !important;
+}
+
+::ng-deep .snackbar {
+  text-align: center !important;
+  background: #fff1d0 !important;
+  opacity: 0.8 !important;
+  margin-bottom: 20% !important;
+  color: darkslategrey;
+}

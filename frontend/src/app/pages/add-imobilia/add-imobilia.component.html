@@ -1,0 +1,32 @@
+<mat-card>
+  <h2> Add Announcement</h2>
+  <h5> Wether you search your place to stay, or you have a nice apartment you want to rent, you can easily create your
+    announcement today.</h5>
+  <hr>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Announcement name</mat-label>
+      <input matInput placeholder="Announcement name" name="name" [ngModel]="apartment.name">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Description" name="description" [ngModel]="apartment.details"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <mat-label>Price</mat-label>
+      <input type="number" matInput placeholder="Price" name="price" [ngModel]="apartment.price">
+    </mat-form-field>
+    <hr>
+    <h3> Add a photo</h3>
+    <div class="form-group">
+      <input type="file"
+             id="file"
+             (change)="handleFileInput($event.target.files)">
+    </div>
+    <hr>
+    <button mat-button class="signInButton" (click)="submit()">Post Announcement</button>
+  </form>
+
+</mat-card>
