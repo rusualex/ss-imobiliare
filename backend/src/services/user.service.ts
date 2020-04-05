@@ -1,4 +1,4 @@
-import { hashService, trainingService } from '../index';
+import { hashService } from '../index';
 import { IMongoResponse } from '../model/mongo-response.model';
 import { IUser, User } from '../model/user.model';
 
@@ -8,16 +8,15 @@ export class UserService {
   }
 
   async getUserById(userId: string): Promise<IUser> {
-    return User.findOne({_id: userId});
+    return User.findOne({ _id: userId });
   }
 
   async getUserByEmail(userEmail: string): Promise<IUser> {
-    return User.findOne({email: userEmail});
+    return User.findOne({ email: userEmail });
   }
 
   async saveUser(user: IUser): Promise<IUser> {
     user.password = await hashService.encrypt(user.password);
-    user.registerDate = new Date();
 
     return new User(user).save();
   }
@@ -30,14 +29,14 @@ export class UserService {
       user.password = await hashService.encrypt(user.password);
     }
 
-    await trainingService.updateNestedUsers(user);
+    // await apartmentService.updateNestedUsers(user);
 
-    return User.updateOne({_id: user._id}, {$set: user});
+    return User.updateOne({ _id: user._id }, { $set: user });
   }
 
   async deleteUserById(userId: string): Promise<IMongoResponse> {
-    await trainingService.deleteNestedUsers(userId);
+    // await apartmentService.deleteNestedUsers(userId);
 
-    return User.deleteOne({_id: userId});
+    return User.deleteOne({ _id: userId });
   }
 }

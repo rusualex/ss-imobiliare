@@ -2,20 +2,20 @@ import * as config from 'config';
 import { App } from './app';
 import { LoginRouter } from './routes/login.router';
 import { ParentRouter } from './routes/parent.router';
-import { TrainingRouter } from './routes/training.router';
+import { ApartmentRouter } from './routes/apartment.router';
 import { UserRouter } from './routes/user.router';
 import { HashService } from './services/hash.service';
 import { LoginService } from './services/login.service';
 import { ResponseWrapperService } from './services/response-wrapper.service';
-import { TrainingService } from './services/training.service';
+import { ApartmentService } from './services/apartment.service';
 import { UserService } from './services/user.service';
 
 const parentRouter: ParentRouter = new ParentRouter();
 const userRouter: UserRouter = new UserRouter();
-const trainingRouter: TrainingRouter = new TrainingRouter();
+const apartmentRouter: ApartmentRouter = new ApartmentRouter();
 const loginRouter: LoginRouter = new LoginRouter();
 const userService: UserService = new UserService();
-const trainingService: TrainingService = new TrainingService();
+const apartmentService: ApartmentService = new ApartmentService();
 const responseWrapperService: ResponseWrapperService = new ResponseWrapperService();
 const hashService: HashService = new HashService();
 const loginService: LoginService = new LoginService();
@@ -30,10 +30,10 @@ export {
   app,
   parentRouter,
   userRouter,
-  trainingRouter,
+  apartmentRouter,
   loginRouter,
   userService,
-  trainingService,
+  apartmentService,
   responseWrapperService,
   loginService,
   hashService

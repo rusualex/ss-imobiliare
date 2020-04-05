@@ -29,7 +29,7 @@ export class App {
 
     this.app.listen(this.port);
 
-    mongoose.connect('mongodb://localhost:27017/pero-academy')
+    mongoose.connect('mongodb://localhost:27017/pero-academy', { useNewUrlParser: true, useUnifiedTopology: true })
       .then(() => console.log('** Connected to MongoDB **'))
       .catch((err: Error) => console.error('** Could not connect to MongoDB **', err));
 

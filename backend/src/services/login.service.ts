@@ -16,7 +16,6 @@ export class LoginService {
       const isValidPassword: boolean = await bcrypt.compare(password, user.password);
 
       if (isValidPassword) {
-        user.lastLogin = new Date();
         await userService.updateUser(user);
 
         return {
@@ -49,7 +48,6 @@ export class LoginService {
           subject: 'Reset Password',
           text: `Access the following link to reset your password: ${body.resetURL}/` + jwt.sign({
             _id: user._id,
-            lastLogin: user.lastLogin
           }, config.get('jwtPrivateKey'))
         });
       } catch (e) {

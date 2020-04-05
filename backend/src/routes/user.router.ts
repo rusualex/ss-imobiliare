@@ -94,7 +94,7 @@ export class UserRouter {
       const user: IUser = await userService.getUserById(userData._id);
       const newPassword: INewPassword = ctx.request.body;
 
-      if (user && new Date(userData.lastLogin).toUTCString() === user.lastLogin.toUTCString()) {
+      if (user) {
         if (newPassword.password === newPassword.passwordConfirmation) {
           user.password = newPassword.password;
           const response: IMongoResponse = await userService.updateUser(user);
