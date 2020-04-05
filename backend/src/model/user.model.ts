@@ -1,6 +1,5 @@
 import * as mongoose from 'mongoose';
 import { Document, Model, Schema } from 'mongoose';
-import { UserStatus } from './user-status.model';
 
 export interface IUser extends Document {
   _id: string;

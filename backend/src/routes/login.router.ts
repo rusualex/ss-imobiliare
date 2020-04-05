@@ -10,7 +10,7 @@ export class LoginRouter {
 
     router.post('/', async (ctx: Context) => {
       try {
-        const auth: IAuth = await loginService.login(ctx.request.body.email, ctx.request.body.password);
+        const auth: IAuth = await loginService.login(ctx.request.body.username, ctx.request.body.password);
         ctx.status = 200;
         ctx.body = responseWrapperService.wrapOk(auth);
       } catch (e) {
