@@ -4,6 +4,8 @@ import * as cors from 'koa-cors';
 import * as Router from 'koa-router';
 import * as mongoose from 'mongoose';
 import { parentRouter } from './';
+import { admin } from './middleware/admin';
+import { auth } from './middleware/auth';
 
 export class App {
   app: Koa;
@@ -20,6 +22,10 @@ export class App {
     this.app.use(bodyParser());
 
     this.app.use(this.router.routes());
+
+    this.app.use(auth);
+
+    this.app.use(admin);
 
     this.app.listen(this.port);
 
