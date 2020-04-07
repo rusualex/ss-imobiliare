@@ -28,6 +28,8 @@ import {RegisterComponent} from './pages/register/register.component';
 import {DetailComponent} from './pages/detail/detail.component';
 import {MatCardModule} from "@angular/material/card";
 import { AddImobiliaComponent } from './pages/add-imobilia/add-imobilia.component';
+import {HttpClientModule} from "@angular/common/http";
+import {httpInterceptorProviders} from "./auth/auth-interceptor";
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import { AddImobiliaComponent } from './pages/add-imobilia/add-imobilia.componen
     AddImobiliaComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
@@ -66,7 +69,7 @@ import { AddImobiliaComponent } from './pages/add-imobilia/add-imobilia.componen
   exports: [
     FormsModule
   ],
-  providers: [FormBuilder, MatSnackBar],
+  providers: [FormBuilder, MatSnackBar,  httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {
