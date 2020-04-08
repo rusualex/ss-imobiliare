@@ -9,14 +9,13 @@ import { IResetBody } from '../model/reset.model';
 import { IUser } from '../model/user.model';
 
 export class LoginService {
-  async login(userEmail: string, password: string): Promise<IAuth> {
-    const user: IUser = await userService.getUserByEmail(userEmail);
+  async login(username: string, password: string): Promise<IAuth> {
+    const user: IUser = await userService.getUserByUsername(username);
 
     if (user) {
       const isValidPassword: boolean = await bcrypt.compare(password, user.password);
 
       if (isValidPassword) {
-        await userService.updateUser(user);
 
         return {
           token: jwt.sign({ _id: user._id }, config.get('jwtPrivateKey')),
@@ -29,7 +28,7 @@ export class LoginService {
   }
 
   async resetPassword(body: IResetBody): Promise<boolean> {
-    const user: IUser = await userService.getUserByEmail(body.resetEmail);
+    const user: IUser = await userService.getUserByUsername(body.resetEmail);
     if (user) {
       await nodemailer.createTestAccount();
 

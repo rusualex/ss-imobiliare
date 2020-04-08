@@ -11,8 +11,8 @@ export class UserService {
     return User.findOne({ _id: userId });
   }
 
-  async getUserByEmail(userEmail: string): Promise<IUser> {
-    return User.findOne({ email: userEmail });
+  async getUserByUsername(username: string): Promise<IUser> {
+    return User.findOne({ username: username });
   }
 
   async saveUser(user: IUser): Promise<IUser> {
