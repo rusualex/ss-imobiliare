@@ -9,7 +9,7 @@ export class ApartmentRouter {
   getRouter(): Router {
     const router: Router = new Router();
 
-    router.get('/', auth, async (ctx: Context) => {
+    router.get('/', async (ctx: Context) => {
       try {
         const filter: object = ctx.request.query;
         const response: IApartment[] = await apartmentService.getApartments(filter);
@@ -21,7 +21,7 @@ export class ApartmentRouter {
       }
     });
 
-    router.get('/:id', auth, async (ctx: Context) => {
+    router.get('/:id',async (ctx: Context) => {
       try {
         const apartmentId: string = ctx.params.id;
         const response: IApartment = await apartmentService.getApartmentById(apartmentId);

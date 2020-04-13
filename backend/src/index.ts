@@ -21,10 +21,10 @@ const hashService: HashService = new HashService();
 const loginService: LoginService = new LoginService();
 const app: App = new App();
  
-if (!config.get('jwtPrivateKey')) {
-  console.error('FATAL ERROR: jwtPrivateKey is not defined');
-  process.exit(1);
-}
+// if (!config.get('jwtPrivateKey')) {
+//   console.error('FATAL ERROR: jwtPrivateKey is not defined');
+//   process.exit(1);
+// }
 
 export {
   app,

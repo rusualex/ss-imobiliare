@@ -4,6 +4,8 @@ import {ErrorStateMatcher} from "@angular/material/core";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthLoginInfo} from "../../model/auth-login-info";
+import {User} from "../../model/model.user";
+import {LoginService} from "../../service/login.service";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private snackBar: MatSnackBar,
               private route: ActivatedRoute,
+              private loginService: LoginService,
               private router: Router) {
     this.form = this.formBuilder.group(
       {
@@ -56,8 +59,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  getUsrname(event) {
-    console.log(event.target.value);
+  getUsername(event) {
+    // console.log(event.target.value);
     this.username = event.target.value;
   }
 
@@ -70,13 +73,20 @@ export class LoginComponent implements OnInit {
   hide = true;
 
   onSubmit() {
-    console.log(this.form);
-    this.loginInfo = new AuthLoginInfo(
-      this.username,
-      this.password);
-    console.log(this.loginInfo);
-    this.showSnackbar('Login successful!');
-    this.router.navigate(['home']);
+    // console.log(this.form);
+    const user = new AuthLoginInfo(this.username, this.password);
+    console.log(user);
+    this.loginService.login(user).subscribe(rez => {
+      console.log(rez)
+        sessionStorage.setItem(
+          'token',
+          rez.username
+        );
+        this.router.navigate(['home']);
+    }, error1 => {
+      this.showSnackbar('Username or password is incorrect. Please try again.');
+    });
+
   }
 
   showSnackbar(message: string) {

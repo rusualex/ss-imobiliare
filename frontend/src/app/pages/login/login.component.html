@@ -4,7 +4,7 @@
   <form [formGroup]="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="example-form">
     <mat-form-field class="nameInput">
       <input matInput placeholder="Username" formControlName="username"
-             [errorStateMatcher]="matcher" (keyup)="getUsrname($event)">
+             [errorStateMatcher]="matcher" (keyup)="getUsername($event)">
       <mat-error *ngIf="form.get('username').hasError('pattern')">
         Enter a valid username.
       </mat-error>

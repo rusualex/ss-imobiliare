@@ -4,6 +4,8 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validat
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {SignUpInfo} from "../../model/sign-up-info";
+import {LoginService} from "../../service/login.service";
+import {UserService} from "../../service/user.service";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -57,7 +59,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private snackBar: MatSnackBar,
-              private router: Router
+              private router: Router,
+              private userService: UserService
   ) {
 
     this.form = this.formBuilder.group({
@@ -110,6 +113,18 @@ export class RegisterComponent implements OnInit {
       this.username,
       this.email,
       this.password);
+    console.log(this.signupInfo);
+
+    this.userService.register(this.signupInfo).subscribe(rez => {
+      console.log(rez);
+      sessionStorage.setItem(
+        'token',
+        rez.username
+      );
+      this.router.navigate(['home']);
+    }, error1 => {
+      this.showSnackbar('Username or password is incorrect. Please try again.');
+    });
 
     this.router.navigate(['login']);
     this.showSnackbar('You successfully signed up!')
