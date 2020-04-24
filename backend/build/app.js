@@ -13,16 +13,18 @@ const admin_1 = require("./middleware/admin");
 const auth_1 = require("./middleware/auth");
 const config_1 = __importDefault(require("config"));
 (async () => {
-    const port = config_1.default.get('port');
+    const port = config_1.default.get('PORT');
     const app = new koa_1.default();
     const router = new koa_router_1.default().use(_1.parentRouter.getRouter().routes());
+    const dbURL = config_1.default.get('DB');
+    console.log('db', dbURL);
     app.use(koa_cors_1.default());
     app.use(koa_bodyparser_1.default());
     app.use(router.routes());
     app.use(auth_1.auth);
     app.use(admin_1.admin);
     app.listen(port);
-    mongoose_1.default.connect('mongodb://localhost:27017/pero-academy', { useNewUrlParser: true, useUnifiedTopology: true })
+    mongoose_1.default.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
         // tslint:disable-next-line: no-console
         .then(() => console.log('** Connected to MongoDB **'))
         // tslint:disable-next-line: no-console
