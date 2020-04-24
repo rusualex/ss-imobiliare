@@ -1,7 +1,6 @@
 {
   "extends": [
-    "tslint:recommended",
-    "shared-tslint-mnn/tslint/tslint_node"
+    "tslint:recommended"
   ],
   "rules": {
     "interface-name": [

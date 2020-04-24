@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import * as config from 'config';
 import * as jwt from 'jsonwebtoken';
 import * as nodemailer from 'nodemailer';
-import * as Mail from 'nodemailer/lib/mailer';
+import Mail from 'nodemailer/lib/mailer';
 import { userService } from '../index';
 import { IAuth } from '../model/auth.model';
 import { IResetBody } from '../model/reset.model';
@@ -24,7 +24,9 @@ export class LoginService {
       }
     }
 
-    return null;
+    return {
+      token: '', user
+    };
   }
 
   async resetPassword(body: IResetBody): Promise<boolean> {

@@ -1,38 +1,34 @@
-import * as Koa from 'koa';
-import * as bodyParser from 'koa-bodyparser';
-import * as cors from 'koa-cors';
-import * as Router from 'koa-router';
-import * as mongoose from 'mongoose';
+import Koa from 'koa';
+import bodyParser from 'koa-bodyparser';
+import cors from 'koa-cors';
+import Router from 'koa-router';
+import mongoose from 'mongoose';
 import { parentRouter } from './';
 import { admin } from './middleware/admin';
 import { auth } from './middleware/auth';
+import config from 'config';
 
-export class App {
-  app: Koa;
-  router: Router;
-  port: number = 8181;
 
-  init(): void {
-    this.app = new Koa();
+(async () => {
+  const port: number = config.get('PORT');
+  const app: Koa = new Koa();
+  const router: Router = new Router().use(parentRouter.getRouter().routes());
+  const dbURL: string = config.get('DB');
+  console.log('db', dbURL);
 
-    this.app.use(cors());
+  app.use(cors());
+  app.use(bodyParser());
+  app.use(router.routes());
+  app.use(auth);
+  app.use(admin);
+  app.listen(port);
+  mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
+    // tslint:disable-next-line: no-console
+    .then(() => console.log('** Connected to MongoDB **'))
+    // tslint:disable-next-line: no-console
+    .catch((err: Error) => console.error('** Could not connect to MongoDB **', err));
 
-    this.router = new Router().use(parentRouter.getRouter().routes());
+  // tslint:disable-next-line: no-console
+  console.log(`** App running on port ${port} **`);
+})();
 
-    this.app.use(bodyParser());
-
-    this.app.use(this.router.routes());
-
-    this.app.use(auth);
-
-    this.app.use(admin);
-
-    this.app.listen(this.port);
-
-    mongoose.connect('mongodb://localhost:27017/pero-academy', { useNewUrlParser: true, useUnifiedTopology: true })
-      .then(() => console.log('** Connected to MongoDB **'))
-      .catch((err: Error) => console.error('** Could not connect to MongoDB **', err));
-
-    console.log(`** App running on port ${this.port} **`);
-  }
-}

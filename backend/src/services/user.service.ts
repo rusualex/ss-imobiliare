@@ -8,11 +8,11 @@ export class UserService {
   }
 
   async getUserById(userId: string): Promise<IUser> {
-    return User.findOne({ _id: userId });
+    return User.findOne({ _id: userId }) as any as IUser;
   }
 
   async getUserByUsername(username: string): Promise<IUser> {
-    return User.findOne({ username: username });
+    return User.findOne({ username }) as any as IUser;
   }
 
   async saveUser(user: IUser): Promise<IUser> {

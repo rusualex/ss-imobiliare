@@ -1,5 +1,5 @@
 import { Context } from 'koa';
-import * as Router from 'koa-router';
+import Router from 'koa-router';
 import { loginService, responseWrapperService } from '../index';
 import { IAuth } from '../model/auth.model';
 import { IResetBody } from '../model/reset.model';

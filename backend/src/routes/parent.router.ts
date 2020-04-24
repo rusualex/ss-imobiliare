@@ -1,7 +1,6 @@
-import * as Router from 'koa-router';
+import Router from 'koa-router';
 
 import { apartmentRouter, loginRouter, userRouter } from '../';
-import { auth } from '../middleware/auth';
 
 export class ParentRouter {
   getRouter(): Router {

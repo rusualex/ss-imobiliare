@@ -1,7 +1,7 @@
-import * as config from 'config';
+import config from 'config';
 import * as jwt from 'jsonwebtoken';
 import { Context } from 'koa';
-import * as Router from 'koa-router';
+import Router from 'koa-router';
 import { responseWrapperService, userService } from '../index';
 import { IMongoResponse } from '../model/mongo-response.model';
 import { INewPassword } from '../model/new-password.model';

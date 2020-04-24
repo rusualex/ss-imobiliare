@@ -1,4 +1,6 @@
 {
-  "jwtPrivateKey": "jwtPrivateKey"
+  "jwtPrivateKey": "jwtPrivateKey",
+  "db": {
+    "uri": "mongodb://ss-imobiliarebd:b0mBZwPCAUCPTIMuP8T4j9wsBRgdFy40z3H6Vla588DYa34IvpDyPFvWtX9DtOIEZQnRtkr3WGAbGexFjHSmcw==@ss-imobiliarebd.mongo.cosmos.azure.com:10255/?ssl=true&appName=@ss-imobiliarebd@"
+  }
 }
- 

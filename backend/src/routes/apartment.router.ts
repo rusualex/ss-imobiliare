@@ -1,5 +1,5 @@
 import { Context } from 'koa';
-import * as Router from 'koa-router';
+import Router from 'koa-router';
 import { responseWrapperService, apartmentService } from '../index';
 import { auth } from '../middleware/auth';
 import { IMongoResponse } from '../model/mongo-response.model';

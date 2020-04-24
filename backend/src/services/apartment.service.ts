@@ -7,7 +7,7 @@ export class ApartmentService {
   }
 
   async getApartmentById(apartmentId: string): Promise<IApartment> {
-    return Apartment.findOne({_id: apartmentId});
+    return Apartment.findOne({ _id: apartmentId }) as any as IApartment;
   }
 
   async saveApartment(apartment: IApartment): Promise<IApartment> {
@@ -15,11 +15,11 @@ export class ApartmentService {
   }
 
   async updateApartment(apartment: IApartment): Promise<IMongoResponse> {
-    return Apartment.updateOne({_id: apartment._id}, {$set: apartment});
+    return Apartment.updateOne({ _id: apartment._id }, { $set: apartment });
   }
 
   async deleteApartmentById(apartmentId: string): Promise<IMongoResponse> {
-    return Apartment.deleteOne({_id: apartmentId});
+    return Apartment.deleteOne({ _id: apartmentId });
   }
 
 
