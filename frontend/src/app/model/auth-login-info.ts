@@ -1,9 +1,9 @@
 export class AuthLoginInfo {
   username:string;
-  password:string;
+  encrypted_password:string;
 
-  constructor(username: string, password: string) {
+  constructor(username: string, encrypted_password: string) {
     this.username = username;
-    this.password = password;
+    this.encrypted_password = encrypted_password;
   }
 }
