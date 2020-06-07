@@ -1,5 +1,5 @@
 export class newApart {
-  id: number;
+  id: string;
   pictureFileName: string;
   name: string;
   details: string;
@@ -7,7 +7,7 @@ export class newApart {
   price: string;
 
 
-  constructor(id: number, pictureFileName: string, name: string, details: string, owner: string, price: string) {
+  constructor(id: string, pictureFileName: string, name: string, details: string, owner: string, price: string) {
     this.id = id;
     this.pictureFileName = pictureFileName;
     this.name = name;

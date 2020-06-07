@@ -1,19 +1,19 @@
 export class Apartment {
-  id: number;
+  id: string;
   pictureFileName: string;
   name: string;
   details: string;
-  owner: string;
-  price: string;
+  owner_id: string;
+  price: number;
   mapLink: string;
 
 
-  constructor(id: number, pictureFileName: string, name: string, details: string, owner: string, price: string, mapLink: string) {
+  constructor(id: string, pictureFileName: string, name: string, details: string, owner_id: string, price: number, mapLink: string) {
     this.id = id;
     this.pictureFileName = pictureFileName;
     this.name = name;
     this.details = details;
-    this.owner = owner;
+    this.owner_id = owner_id;
     this.price = price;
     this.mapLink = mapLink;
   }
