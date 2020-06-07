@@ -3,6 +3,7 @@ import Router from 'koa-router';
 import { loginService, responseWrapperService } from '../index';
 import { IAuth } from '../model/auth.model';
 import { IResetBody } from '../model/reset.model';
+import { IUser } from '../model/user.model';
 
 export class LoginRouter {
   getRouter(): Router {
@@ -10,14 +11,15 @@ export class LoginRouter {
 
     router.post('/', async (ctx: Context) => {
       try {
-        const auth: IAuth = await loginService.login(ctx.request.body.userName, ctx.request.body.password);
+        const auth: IUser = await loginService.login(ctx.request.body.userName, ctx.request.body.encrypted_password);
         if (auth) {
           ctx.status = 200;
+          ctx.body = responseWrapperService.wrapOk(auth);
         }
         else {
           ctx.status = 401;
+          ctx.body = responseWrapperService.wrapException({ message: 'Invalid user or pass' });
         };
-        ctx.body = responseWrapperService.wrapOk(auth);
       } catch (e) {
         ctx.status = 500;
         ctx.body = responseWrapperService.wrapException(e);

@@ -3,7 +3,6 @@ import { IWrappedResponse } from '../model/wrapped-response.model';
 export class ResponseWrapperService {
   wrapOk(payload: any): IWrappedResponse {
     return {
-      status: 'ok',
       data: payload
     };
   }

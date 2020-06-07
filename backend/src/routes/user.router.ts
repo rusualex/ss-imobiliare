@@ -18,10 +18,6 @@ export class UserRouter {
         const userResponse: IUser[] = await userService.getUsers();
         if (userResponse) {
           ctx.status = 200;
-          userResponse.forEach((user)=>{
-            delete user._id;
-            delete user.encrypted_password;
-          });
           ctx.body = responseWrapperService.wrapOk(userResponse);
         }
         else {

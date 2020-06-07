@@ -1,5 +1,5 @@
 export interface IWrappedResponse {
-  status: string;
+  status?: string;
   message?: string;
   code?: number;
   data?: any;

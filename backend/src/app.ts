@@ -3,7 +3,7 @@ import bodyParser from 'koa-bodyparser';
 import cors from 'koa-cors';
 import Router from 'koa-router';
 import mongoose from 'mongoose';
-import { parentRouter } from './';
+import { parentRouter, ampq } from './';
 import { admin } from './middleware/admin';
 import { auth } from './middleware/auth';
 import config from 'config';
@@ -15,6 +15,7 @@ import config from 'config';
   const router: Router = new Router().use(parentRouter.getRouter().routes());
   const dbURL: string = config.get('DB');
   console.log('db', dbURL);
+
 
   app.use(cors());
   app.use(bodyParser());
@@ -28,7 +29,7 @@ import config from 'config';
     // tslint:disable-next-line: no-console
     .catch((err: Error) => console.error('** Could not connect to MongoDB **', err));
 
-  // tslint:disable-next-line: no-console
+    // tslint:disable-next-line: no-console
   console.log(`** App running on port ${port} **`);
 })();
 

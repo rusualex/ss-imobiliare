@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import * as config from 'config';
+import config from 'config';
 import * as jwt from 'jsonwebtoken';
 import * as nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
@@ -9,24 +9,21 @@ import { IResetBody } from '../model/reset.model';
 import { IUser } from '../model/user.model';
 
 export class LoginService {
-  async login(userName: string, password: string): Promise<IAuth> {
+  async login(userName: string, password: string): Promise<IUser> {
     const user: IUser = await userService.getUserByUsername(userName);
-
     if (user) {
-      // const isValidPassword: boolean = await bcrypt.compare(password, user.password);
+      const isValidPassword: boolean = await bcrypt.compare(password, user.encrypted_password);
+      if (isValidPassword) {
 
-      // if (isValidPassword) {
-
-        return {
-          token: jwt.sign({ _id: user._id }, config.get('jwtPrivateKey')),
-          user
-        };
-      // }
+        return user;
+        // {
+        // token: jwt.sign({ _id: user._id }, config.get('jwtPrivateKey')),
+        // user
+        // };
+      }
     }
 
-    return {
-      token: '', user
-    };
+    return null;
   }
 
   async resetPassword(body: IResetBody): Promise<boolean> {
