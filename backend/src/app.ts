@@ -21,7 +21,7 @@ import config from 'config';
   app.use(router.routes());
   app.use(auth);
   app.use(admin);
-  app.listen(port);
+  app.listen(process.env.PORT || port);
   mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
     // tslint:disable-next-line: no-console
     .then(() => console.log('** Connected to MongoDB **'))
