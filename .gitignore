@@ -1,1 +1,11 @@
 ./node_modules
+./build
+.build/*
+backend/build
+backend/build/*
+/node_modules
+/build
+frontend
+.frontend/
+./frontend
+frontend
