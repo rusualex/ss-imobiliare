@@ -1,3 +1,4 @@
+import { User } from './../model/user.model';
 import config from 'config';
 import * as jwt from 'jsonwebtoken';
 import { Context } from 'koa';
@@ -6,17 +7,27 @@ import { responseWrapperService, userService } from '../index';
 import { IMongoResponse } from '../model/mongo-response.model';
 import { INewPassword } from '../model/new-password.model';
 import { IUser } from '../model/user.model';
+import { auth } from '../middleware/auth';
 
 export class UserRouter {
-  getRouter(): Router {
+  getRouter(): Router { 
     const router: Router = new Router();
 
     router.get('/', async (ctx: Context) => {
       try {
-        const filter: object = ctx.request.query;
-        const response: IUser[] = await userService.getUsers(filter);
-        ctx.status = 200;
-        ctx.body = responseWrapperService.wrapOk(response);
+        const userResponse: IUser[] = await userService.getUsers();
+        if (userResponse) {
+          ctx.status = 200;
+          userResponse.forEach((user)=>{
+            delete user._id;
+            delete user.encrypted_password;
+          });
+          ctx.body = responseWrapperService.wrapOk(userResponse);
+        }
+        else {
+          ctx.status = 204;
+          ctx.body = responseWrapperService.wrapOk(userResponse);
+        }
       } catch (e) {
         ctx.status = 500;
         ctx.body = responseWrapperService.wrapException(e);
@@ -26,9 +37,34 @@ export class UserRouter {
     router.get('/:id', async (ctx: Context) => {
       try {
         const userId: string = ctx.params.id;
-        const response: IUser = await userService.getUserById(userId);
-        ctx.status = 200;
-        ctx.body = responseWrapperService.wrapOk(response);
+        const userResponse: IUser = await userService.getUserById(userId);
+        if (userResponse) {
+          ctx.status = 200;
+          const etc:any = userResponse;
+          ctx.body = responseWrapperService.wrapOk(userResponse);
+        }
+        else {
+          ctx.status = 204;
+          ctx.body = responseWrapperService.wrapOk(null);
+        }
+      } catch (e) {
+        ctx.status = 500;
+        ctx.body = responseWrapperService.wrapException(e);
+      }
+    });
+
+    router.get('/:userName', async (ctx: Context) => {
+      try {
+        const userName: string = ctx.params.userName;
+        const userResponse: IUser = await userService.getUserByUsername(userName);
+        if (userResponse) {
+          ctx.status = 200;
+          ctx.body = responseWrapperService.wrapOk(userResponse);
+        }
+        else {
+          ctx.status = 204;
+          ctx.body = responseWrapperService.wrapOk(userResponse);
+        }
       } catch (e) {
         ctx.status = 500;
         ctx.body = responseWrapperService.wrapException(e);
@@ -37,20 +73,25 @@ export class UserRouter {
 
     router.post('/', async (ctx: Context) => {
       try {
-        const response: IUser = await userService.saveUser(ctx.request.body);
-        ctx.status = 200;
-        ctx.body = responseWrapperService.wrapOk(response);
+        const userResponse: IUser = await userService.saveUser(ctx.request.body);
+        if (userResponse) {
+          ctx.status = 201;
+          ctx.body = responseWrapperService.wrapOk(userResponse);
+        } else {
+          ctx.status = 200;
+          ctx.body = responseWrapperService.wrapOk(userResponse);
+        }
       } catch (e) {
         ctx.status = 500;
         ctx.body = responseWrapperService.wrapException(e);
       }
     });
 
-    router.put('/', async (ctx: Context) => {
+    router.put('/', auth, async (ctx: Context) => {
       try {
-        const response: IMongoResponse = await userService.updateUser(ctx.request.body);
+        const userResponse: IMongoResponse = await userService.updateUser(ctx.request.body);
         ctx.status = 200;
-        ctx.body = responseWrapperService.wrapOk(response);
+        ctx.body = responseWrapperService.wrapOk(userResponse.nModified);
       } catch (e) {
         ctx.status = 500;
         ctx.body = responseWrapperService.wrapException(e);
@@ -60,9 +101,9 @@ export class UserRouter {
     router.delete('/:id', async (ctx: Context) => {
       try {
         const userId: string = ctx.params.id;
-        const response: IMongoResponse = await userService.deleteUserById(userId);
+        const userResponse: IMongoResponse = await userService.deleteUserById(userId);
         ctx.status = 200;
-        ctx.body = responseWrapperService.wrapOk(response);
+        ctx.body = responseWrapperService.wrapOk(userResponse.nDeleted);
       } catch (e) {
         ctx.status = 500;
         ctx.body = responseWrapperService.wrapException(e);
@@ -96,7 +137,7 @@ export class UserRouter {
 
       if (user) {
         if (newPassword.password === newPassword.passwordConfirmation) {
-          user.password = newPassword.password;
+          user.encrypted_password = newPassword.password;
           const response: IMongoResponse = await userService.updateUser(user);
           ctx.status = 200;
           ctx.body = responseWrapperService.wrapOk(response);

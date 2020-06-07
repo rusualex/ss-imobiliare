@@ -15,4 +15,11 @@ export class ResponseWrapperService {
       typeId: error.typeId
     };
   }
+
+  wrapToken(message: any): IWrappedResponse {
+    return {
+      status: 'error',
+      message
+    }
+  }
 }

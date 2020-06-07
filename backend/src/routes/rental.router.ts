@@ -1,18 +1,18 @@
 import { Context } from 'koa';
 import Router from 'koa-router';
-import { responseWrapperService, apartmentService } from '../index';
+import { responseWrapperService, rentalService } from '../index';
 import { auth } from '../middleware/auth';
 import { IMongoResponse } from '../model/mongo-response.model';
-import { IApartment } from '../model/apartment.model';
+import { IRental } from '../model/rental.model';
 
-export class ApartmentRouter {
+export class RentalRouter {
   getRouter(): Router {
     const router: Router = new Router();
 
     router.get('/', async (ctx: Context) => {
       try {
         const filter: object = ctx.request.query;
-        const response: IApartment[] = await apartmentService.getApartments(filter);
+        const response: IRental[] = await rentalService.getRentals(filter);
         ctx.status = 200;
         ctx.body = responseWrapperService.wrapOk(response);
       } catch (e) {
@@ -23,8 +23,8 @@ export class ApartmentRouter {
 
     router.get('/:id',async (ctx: Context) => {
       try {
-        const apartmentId: string = ctx.params.id;
-        const response: IApartment = await apartmentService.getApartmentById(apartmentId);
+        const rentalId: string = ctx.params.id;
+        const response: IRental = await rentalService.getRentalById(rentalId);
         ctx.status = 200;
         ctx.body = responseWrapperService.wrapOk(response);
       } catch (e) {
@@ -35,7 +35,7 @@ export class ApartmentRouter {
 
     router.post('/', async (ctx: Context) => {
       try {
-        const response: IApartment = await apartmentService.saveApartment(ctx.request.body);
+        const response: IRental = await rentalService.saveRental(ctx.request.body);
         ctx.status = 200;
         ctx.body = responseWrapperService.wrapOk(response);
       } catch (e) {
@@ -46,7 +46,7 @@ export class ApartmentRouter {
 
     router.put('/', auth, async (ctx: Context) => {
       try {
-        const response: IMongoResponse = await apartmentService.updateApartment(ctx.request.body);
+        const response: IMongoResponse = await rentalService.updateRental(ctx.request.body);
         ctx.status = 200;
         ctx.body = responseWrapperService.wrapOk(response);
       } catch (e) {
@@ -57,8 +57,8 @@ export class ApartmentRouter {
 
     router.delete('/:id', auth, async (ctx: Context) => {
       try {
-        const apartmentId: string = ctx.params.id;
-        const response: IMongoResponse = await apartmentService.deleteApartmentById(apartmentId);
+        const rentalId: string = ctx.params.id;
+        const response: IMongoResponse = await rentalService.deleteRentalById(rentalId);
         ctx.status = 200;
         ctx.body = responseWrapperService.wrapOk(response);
       } catch (e) {
